@@ -1,0 +1,1 @@
+//from isomorphic500 <https://github.com/gpbl/isomorphic500/blob/master/webpack/server.js>

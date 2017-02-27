@@ -1,8 +1,9 @@
-var WebpackDevServer = require("webpack-dev-server")
-var webpack = require("webpack")
-var config = require("./dev.config")
+//from isomorphic500 <https://github.com/gpbl/isomorphic500/blob/master/webpack/server.js>
 
-const host = process.env.HOST || "0.0.0.0"
+import WebpackDevServer from 'webpack-dev-server'
+import webpack from 'webpack'
+import config from './dev.config'
+const host = process.env.HOST || '0.0.0.0'
 const port = (process.env.PORT + 1) || 3001
 
 const options = {
@@ -21,6 +22,6 @@ module.exports = function() {
   const webpackDevServer = new WebpackDevServer(compiler, options)
   
   return webpackDevServer.listen(port, host, function() {
-    console.log("Webpack development server listening on %s:%s", host, port)
+    console.log('Webpack development server listening on %s:%s', host, port)
   })
 }

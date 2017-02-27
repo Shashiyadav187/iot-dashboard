@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./src/bin/www",
-    "dev": "NODE_ENV=development nodemon ./src/bin/www"
+    "dev": "NODE_ENV=development nodemon --exec babel-node ./src/bin/www"
   },
   "author": {
     "name": "Yuri Silveira"
