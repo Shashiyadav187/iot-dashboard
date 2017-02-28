@@ -8,7 +8,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import routes from './routes';
-import NotFoundPage from './components/ErrorHandler';
+import ErrorPage from './components/ErrorPage';
 
 var app = express()
 
@@ -20,22 +20,32 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'static')))
 
+app.get('*', (req, res) => {
+  match(
+    { routes, location: req.url },
+    (err, redirectLocation, renderProps) => {
 
-app.use((req, res, next) => {
-  var err = new Error('Not Found')
-  err.status = 404
-  next(err)
-})
+      if (err) {
+        return res.status(500).send(err.message);
+      }
 
-app.use((err, req, res, next) => {
-  res.locals.message = err.message
-  res.locals.error = req.app.get('env') === 'development' ? err : {}
+      if (redirectLocation) {
+        return res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+      }
 
-  res.status(err.status || 500)
-  res.end()
-  //res.render('error')
-})
+      let markup;
+      if (renderProps) {
+        markup = renderToString(<RouterContext {...renderProps}/>)
+      } else {
+        markup = renderToString(<ErrorPage />)
+        res.status(404)
+      }
+
+      return res.render('index', { title: "hello", markup })
+    }
+  );
+});
 
 export default app
