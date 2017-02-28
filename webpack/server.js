@@ -1,4 +1,5 @@
 //from isomorphic500 <https://github.com/gpbl/isomorphic500/blob/master/webpack/server.js>
+'use strict'
 
 import WebpackDevServer from 'webpack-dev-server'
 import webpack from 'webpack'
@@ -13,7 +14,8 @@ const options = {
   lazy: false,
   publicPath: config.output.publicPath,
   stats: {
-    colors: true
+    colors: true,
+    errorDetails: true
   }
 }
 

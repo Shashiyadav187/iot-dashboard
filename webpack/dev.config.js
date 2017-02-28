@@ -1,4 +1,5 @@
 //from isomorphic500 <https://github.com/gpbl/isomorphic500/blob/master/webpack/server.js>
+'use strict'
 
 import path from 'path'
 import webpack from 'webpack'
@@ -11,7 +12,7 @@ const config = {
   entry: [
     `webpack-dev-server/client?http://${host}:${port}`,
     'webpack/hot/only-dev-server',
-    path.resolve(__dirname, '../src/app-client.js')
+    path.resolve(__dirname, '../src/app-client.jsx')
   ],
   output: {
     filename: 'bundle.js',
@@ -20,7 +21,11 @@ const config = {
     publicPath: `http://${host}:${port}/assets/`
   },
   module: {
-    loaders: [{ test: /\.(js|jsx)$/, exclude: /node_modules/, loaders: ['react-hot-loader', 'babel-loader?cacheDirectory'] }]
+    loaders: [{ test: /\.jsx?$/, exclude: /node_modules/, loaders: ['react-hot-loader', 'babel-loader?cacheDirectory'] }]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    modules: ['node_modules']
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
