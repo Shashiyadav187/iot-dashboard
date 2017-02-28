@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import app from '../app'
+import app from './app'
 import debug from 'debug'
 import http from 'http'
 import io from 'socket.io'
@@ -22,7 +22,7 @@ server.on('listening', onListening)
 console.log('Express %s server listening on %s:%s', app.get('env'), app.get('host'), app.get('port'))
 
 if (app.get('env') === 'development') {
-    require('../../webpack/server')()
+    require('../webpack/server')()
 }
 
 

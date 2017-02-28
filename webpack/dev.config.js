@@ -11,7 +11,7 @@ const config = {
   entry: [
     `webpack-dev-server/client?http://${host}:${port}`,
     'webpack/hot/only-dev-server',
-    path.resolve(__dirname, '../src/public/javascripts/app.js')
+    path.resolve(__dirname, '../src/app-client.js')
   ],
   output: {
     filename: 'bundle.js',
