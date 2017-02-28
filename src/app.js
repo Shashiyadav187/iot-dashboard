@@ -39,7 +39,10 @@ app.get('*', (req, res) => {
       if (renderProps) {
         markup = renderToString(<RouterContext {...renderProps}/>)
       } else {
-        markup = renderToString(<ErrorPage />)
+        const stackTrace = (req.app.get('env') === 'development') ? 
+                           JSON.stringify(err) : ''
+
+        markup = renderToString(<ErrorPage stackTrace={stackTrace} />)
         res.status(404)
       }
 
