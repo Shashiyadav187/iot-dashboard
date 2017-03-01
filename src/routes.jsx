@@ -3,9 +3,7 @@
 import React from 'react'
 import {Route, IndexRoute} from 'react-router'
 
-import App from './components/master/App'
-import ErrorPage from './components/master/ErrorPage'
-import IndexPage from './components/master/IndexPage'
+import {App, ErrorPage, IndexPage} from './components/master'
 
 const routes = (
   <Route path='/' component={App} >
